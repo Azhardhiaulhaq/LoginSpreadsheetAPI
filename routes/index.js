@@ -13,21 +13,14 @@ const client = new google.auth.JWT(
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
   let NIM = req.query.NIM
-  // if (typeof NIM == 'undefined'){
-  //   alert("ini undefined");
-  // }
-  console.log('HALOOOOOOO' + NIM)
-  // res.render('index', { title: 'Azhar' });
-  let reqPath = path.join(__dirname,'../')
-  console.log('PATH NOW :' + reqPath)
-  res.sendFile(path.join(__dirname+'/../views/Login/index.html'))
+  res.sendFile(path.join(__dirname + '/../views/Login/index.html'))
 });
 
-router.post('/',function(req,res,next){
-  console.log('HALOOOOOOOOOOO ' + req.body.NIM)
+router.post('/', function (req, res, next) {
+  console.log(req.body.NIM)
   var NIM = req.body.NIM;
   client.authorize(function (err, tokens) {
     if (err) {
@@ -35,9 +28,6 @@ router.post('/',function(req,res,next){
       return;
     } else {
       querySpreadSheet(client, NIM);
-      console.log("######################" + name);
-      // res.writeHead(200, { 'Content-Type': 'text/html' });
-      // res.end(Name);
       console.log("connected");
     }
   });
@@ -73,7 +63,15 @@ async function querySpreadSheet(cl, NIM) {
       console.log("No Data Found");
     }
     if (found) {
-      let resources = [["Hadir"]];
+      var date = new Date();
+      var dateStr =
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        ("00" + date.getDate()).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2);
+      let resources = [["Hadir",dateStr]];
       var updatecell = i + 3;
       const updateOptions = {
         spreadsheetId: '1z_4n2YlYtipGgPAn8oJ5fSF5kEKa3G0DfUQ6DkQRKqA',
@@ -83,12 +81,10 @@ async function querySpreadSheet(cl, NIM) {
       };
 
       let response = await gsapi.spreadsheets.values.update(updateOptions);
-      console.log(response);
-      console.log(Name);
     }
   } catch (err) {
     next(err);
-  } 
+  }
 
 }
 
