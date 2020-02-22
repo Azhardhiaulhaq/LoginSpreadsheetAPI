@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>PT February Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/favicon" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/bootstrapcss/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+				<form method="POST" class="login100-form validate-form">
+					<span class="login100-form-title p-b-33">
+						PT FEBRUARY 2020
+					</span>
+
+					<div class="wrap-input100 validate-input">
+						<input class="input100" id="NIM" type="text" name="NIM" placeholder="Nomor Induk Mahasiswa">
+						<span class="focus-input100-1"></span>
+						<span class="focus-input100-2"></span>
+					</div>
+
+					<div id="foralert">
+						<br>
+					</div>
+					<div class="container-login100-form-btn m-t-20">
+						<button class="login100-form-btn">
+							MASUK
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		$.ajax({
+			url: '/',
+			complete: function (data) {
+				console.log('HTML : ' + data);
+			}
+		});
+	</script>
+</body>
+
+</html>
