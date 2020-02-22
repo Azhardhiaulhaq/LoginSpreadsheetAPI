@@ -38,8 +38,8 @@ async function querySpreadSheet(cl, NIM) {
   try {
     const gsapi = google.sheets({ version: 'v4', auth: cl });
     const opt = {
-      spreadsheetId: '1z_4n2YlYtipGgPAn8oJ5fSF5kEKa3G0DfUQ6DkQRKqA',
-      range: 'Sheet1!A3:E'
+      spreadsheetId: '1aVThowY0xkOfwA4ElBoBhj3QXWhT1ihTZ1kS0DEe16w',
+      range: 'Data Kehadiran (Mentah)!S2:S'
     };
 
     let data = await gsapi.spreadsheets.values.get(opt);
@@ -50,11 +50,11 @@ async function querySpreadSheet(cl, NIM) {
       var found = false;
       var i = 0;
       while (!found && i < rows.length) {
-        if (rows[i][2] == NIM) {
+        if (rows[i][0] == NIM) {
           found = true;
           Name = rows[i][1];
           console.log("found");
-          console.log(rows[i][1] + rows[i][2]);
+          console.log(i + ' : ' +rows[i][0]);
         } else {
           i++;
         }
@@ -72,10 +72,10 @@ async function querySpreadSheet(cl, NIM) {
         ("00" + date.getMinutes()).slice(-2) + ":" +
         ("00" + date.getSeconds()).slice(-2);
       let resources = [["Hadir",dateStr]];
-      var updatecell = i + 3;
+      var updatecell = i + 1;
       const updateOptions = {
-        spreadsheetId: '1z_4n2YlYtipGgPAn8oJ5fSF5kEKa3G0DfUQ6DkQRKqA',
-        range: 'Sheet1!F' + updatecell.toString(),
+        spreadsheetId: '1aVThowY0xkOfwA4ElBoBhj3QXWhT1ihTZ1kS0DEe16w',
+        range: 'Data Kehadiran (Mentah)!X' + updatecell.toString(),
         valueInputOption: 'USER_ENTERED',
         resource: { values: resources }
       };
@@ -83,7 +83,7 @@ async function querySpreadSheet(cl, NIM) {
       let response = await gsapi.spreadsheets.values.update(updateOptions);
     }
   } catch (err) {
-    next(err);
+    console.log(err)
   }
 
 }
