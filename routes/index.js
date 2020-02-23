@@ -63,6 +63,7 @@ async function querySpreadSheet(cl, NIM) {
       console.log("No Data Found");
     }
     if (found) {
+      console.log("Nulis")
       var date = new Date();
       var dateStr =
         ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
@@ -72,7 +73,7 @@ async function querySpreadSheet(cl, NIM) {
         ("00" + date.getMinutes()).slice(-2) + ":" +
         ("00" + date.getSeconds()).slice(-2);
       let resources = [["Hadir",dateStr]];
-      var updatecell = i + 1;
+      var updatecell = i + 2;
       const updateOptions = {
         spreadsheetId: '1aVThowY0xkOfwA4ElBoBhj3QXWhT1ihTZ1kS0DEe16w',
         range: 'Data Kehadiran (Mentah)!X' + updatecell.toString(),
